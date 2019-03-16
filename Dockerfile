@@ -1,5 +1,4 @@
-#FROM openjdk:8-jre
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM openjdk:latest
 MAINTAINER "hendisantika@yahoo.co.id"
 VOLUME /tmp
 ADD build/libs/springboot-docker-demo1-0.0.1-SNAPSHOT.jar app.jar
