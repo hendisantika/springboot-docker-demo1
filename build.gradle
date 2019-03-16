@@ -1,13 +1,33 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.3.RELEASE'
+        gradleDockerVersion = '1.2'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("se.transmode.gradle:gradle-docker:${gradleDockerVersion}")
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.1.3.RELEASE'
     id 'java'
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'docker'
 
 group = 'com.hendisantika'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+jar {
+    baseName = 'springboot-docker-demo1'
+    version = '0.0.1-SNAPSHOT'
+}
 
 repositories {
     mavenCentral()
@@ -15,5 +35,21 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-actuator-docs'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+    push = true
+    applicationName = jar.baseName
+    dockerfile = file('Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
 }
