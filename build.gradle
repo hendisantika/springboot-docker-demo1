@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.9.9'
+        springBootVersion = '3.0.0'
         gradleDockerVersion = '1.2'
     }
     repositories {
@@ -22,7 +22,7 @@ apply plugin: 'docker'
 
 group = 'com.hendisantika'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '21'
 
 jar {
     baseName = 'springboot-docker-demo1'
