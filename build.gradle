@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '3.3.4'
+        springBootVersion = '3.3.5'
         gradleDockerVersion = '1.2'
     }
     repositories {
